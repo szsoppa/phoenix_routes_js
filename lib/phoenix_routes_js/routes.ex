@@ -10,6 +10,13 @@ defmodule PhoenixRoutesJs.Routes do
   defp group_by_path(routes), do: group_by_path(routes, %{})
 
   @doc false
+  defp group_by_path([%{plug_opts: opts} = route | routes], paths) do
+    route = Map.put(route, :opts, opts)
+
+    group_by_path([route] ++ routes, paths)
+  end
+
+  @doc false
   defp group_by_path([route | routes], paths) do
     %{helper: helper, opts: action, path: path} = route
 
