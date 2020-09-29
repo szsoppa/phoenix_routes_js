@@ -11,7 +11,7 @@ defmodule PhoenixRoutesJs.Routes do
 
   @doc false
   defp group_by_path([%{plug_opts: opts} = route | routes], paths) do
-    route = Map.put(route, :opts, opts)
+    route = Map.put(route, :opts, opts) |> Map.delete(:plug_opts)
 
     group_by_path([route] ++ routes, paths)
   end
